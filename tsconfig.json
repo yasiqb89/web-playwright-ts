@@ -1,0 +1,84 @@
+{
+    "compilerOptions": {
+        "target": "ESNext",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "lib": [
+            "ESNext",
+            "DOM"
+        ],
+        "strict": true,
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "skipLibCheck": true,
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "noEmit": true,
+        "types": [
+            "node",
+            "@playwright/test"
+        ]
+    },
+    "include": [
+        "**/*.ts"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}
+// {
+//   "compilerOptions": {
+//     /* Language and Environment */
+//     "target": "ESNext",
+//     "lib": ["ESNext", "DOM"],
+//     /* Modules */
+//     "module": "commonjs",
+//     "moduleResolution": "node",
+//     "baseUrl": ".",
+//     "paths": {
+//       "@pages/*": ["pages/*"],
+//       "@utils/*": ["utils/*"],
+//       "@fixtures/*": ["fixtures/*"],
+//       "@config/*": ["config/*"],
+//       "@data/*": ["data/*"],
+//       "@tests/*": ["tests/*"]
+//     },
+//     /* Type Checking */
+//     "strict": true,
+//     "noUnusedLocals": true,
+//     "noUnusedParameters": true,
+//     "noImplicitReturns": true,
+//     "noFallthroughCasesInSwitch": true,
+//     "noUncheckedIndexedAccess": true,
+//     "exactOptionalPropertyTypes": true,
+//     /* Emit */
+//     "noEmit": true,
+//     "sourceMap": true,
+//     /* Interop Constraints */
+//     "esModuleInterop": true,
+//     "allowSyntheticDefaultImports": true,
+//     "forceConsistentCasingInFileNames": true,
+//     "isolatedModules": true,
+//     /* Skip Checking */
+//     "skipLibCheck": true,
+//     /* Advanced */
+//     "resolveJsonModule": true,
+//     "types": ["node", "@playwright/test"]
+//   },
+//   "include": [
+//     "tests/**/*.ts",
+//     "pages/**/*.ts",
+//     "utils/**/*.ts",
+//     "fixtures/**/*.ts",
+//     "config/**/*.ts",
+//     "playwright.config.ts"
+//   ],
+//   "exclude": [
+//     "node_modules",
+//     "test-results",
+//     "playwright-report",
+//     "playwright/.cache",
+//     "allure-results",
+//     "allure-report"
+//   ]
+// }

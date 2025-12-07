@@ -1,0 +1,29 @@
+{
+  "name": "web-playwright-ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:e2e": "npx playwright test tests/e2e",
+    "test:ui": "npx playwright test --ui",
+    "test:headed": "npx playwright test --headed",
+    "test:debug": "npx playwright test --debug"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yasiqb89/web-playwright-ts.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/yasiqb89/web-playwright-ts/issues"
+  },
+  "homepage": "https://github.com/yasiqb89/web-playwright-ts#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.57.0",
+    "@types/node": "^24.10.1"
+  }
+}
