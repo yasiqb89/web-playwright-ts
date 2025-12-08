@@ -27,7 +27,7 @@ export class LoginPage extends BasePage {
         await this.loginButton.click();
     }
 
-    async getErrorMessage(): Promise<string | null> {
+    async getErrorMessage() {
         return this.errorMessage.textContent();
     }
 }
