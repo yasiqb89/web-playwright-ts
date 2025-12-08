@@ -24,15 +24,11 @@ export class InventoryPage extends BasePage {
 
     async addProductToCartByName(productName: string) {
 
-        const item = this.inventoryContainer
-            .locator('.inventory_item')
-            .filter({ hasText: productName })
-            .first();
+        // Convert "Sauce Labs Backpack" to "add-to-cart-sauce-labs-backpack"
+        const nameWithDash = productName.toLowerCase().replace(/\s+/g, '-');
+        const testId = `add-to-cart-${nameWithDash}`;
 
-        console.log(item);
-
-        const addToCartButton = this.page.locator("[data-test=\"add-to-cart-sauce-labs-backpack\"]")
-        console.log(addToCartButton);
+        const addToCartButton = this.page.locator(`[data-test="${testId}"]`);
         await addToCartButton.click();
     }
 
