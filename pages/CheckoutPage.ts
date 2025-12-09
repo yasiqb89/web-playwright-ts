@@ -2,7 +2,6 @@ import { BasePage } from "./base/BasePage";
 import { Page, Locator } from "@playwright/test";
 
 export class CheckoutPage extends BasePage {
-    // Step 1
     private readonly firstNameInput: Locator;
     private readonly lastNameInput: Locator;
     private readonly postalCodeInput: Locator;
@@ -10,7 +9,7 @@ export class CheckoutPage extends BasePage {
     private readonly cancelButton: Locator;
     private readonly errorMessage: Locator;
 
-    // Step 2
+
     private readonly finishButton: Locator;
     private readonly summaryContainer: Locator;
 
