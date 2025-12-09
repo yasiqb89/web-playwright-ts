@@ -8,6 +8,7 @@ export class InventoryPage extends BasePage {
     private readonly sortSelect: Locator;
     private readonly productNames: Locator;
     private readonly productPrices: Locator;
+    private readonly cartLink: Locator;
 
     constructor(page: Page) {
         super(page);
@@ -26,6 +27,8 @@ export class InventoryPage extends BasePage {
 
         // Product prices
         this.productPrices = this.page.locator('[data-test="inventory-item-price"]');
+
+        this.cartLink = this.page.locator('[data-test="shopping-cart-link"]');
     }
 
     async open() {
@@ -84,6 +87,11 @@ export class InventoryPage extends BasePage {
         const texts = await this.productPrices.allTextContents();
         console.log('Product Prices: ', texts);
         return texts.map(n => Number(n.replace('$', '')));
+    }
+
+    async goToCart() {
+        await this.cartLink.click();
+        await this.waitForUrl('/cart.html');
     }
 
 }

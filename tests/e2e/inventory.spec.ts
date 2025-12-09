@@ -111,4 +111,3 @@ test('products are sorted by price high to low when using price sort', async ({ 
 });
 
 
-
