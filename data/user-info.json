@@ -1,0 +1,22 @@
+{
+    "default": {
+        "firstName": "John",
+        "lastName": "Doe",
+        "postalCode": "12345"
+    },
+    "belgian": {
+        "firstName": "Yassir",
+        "lastName": "Iqbal",
+        "postalCode": "1000"
+    },
+    "missingLastName": {
+        "firstName": "Anna",
+        "lastName": "",
+        "postalCode": "4000"
+    },
+    "invalidPostal": {
+        "firstName": "Test",
+        "lastName": "User",
+        "postalCode": ""
+    }
+}

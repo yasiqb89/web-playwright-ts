@@ -44,4 +44,13 @@ export class CartPage extends BasePage {
         await this.page.waitForURL('/inventory.html');
     }
 
+
+    async removeItemByName(productName: string) {
+        const item = this.cartItems
+            .filter({ hasText: productName })
+            .first();
+
+        const removeButton = item.locator('[data-test^="remove-"]');
+        await removeButton.click();
+    }
 }
