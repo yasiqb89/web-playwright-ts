@@ -8,6 +8,7 @@ export class CheckoutPage extends BasePage {
     private readonly postalCodeInput: Locator;
     private readonly continueButton: Locator;
     private readonly cancelButton: Locator;
+    private readonly errorMessage: Locator;
 
     // Step 2
     private readonly finishButton: Locator;
@@ -29,6 +30,9 @@ export class CheckoutPage extends BasePage {
 
         // Complete page
         this.completeHeader = this.page.locator('.complete-header');
+
+        // For error message
+        this.errorMessage = this.page.locator('[data-test="error"]');
     }
 
     async fillCustomerInfo(firstName: string, lastName: string, postalCode: string) {
@@ -42,6 +46,10 @@ export class CheckoutPage extends BasePage {
         await this.page.waitForURL('/checkout-step-two.html');
     }
 
+    async clickContinue() {
+        await this.continueButton.click();
+    }
+
     async finishCheckout() {
         await this.finishButton.click();
         await this.page.waitForURL('/checkout-complete.html');
@@ -51,4 +59,12 @@ export class CheckoutPage extends BasePage {
         return this.completeHeader.textContent();
     }
 
+    async getErrorMessage(): Promise<string | null> {
+        const text = await this.errorMessage.textContent();
+        if (text) {
+            return text.trim();
+        } else {
+            return null;
+        }
+    }
 }

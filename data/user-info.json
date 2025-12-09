@@ -14,6 +14,11 @@
         "lastName": "",
         "postalCode": "4000"
     },
+    "missingFirstName": {
+        "firstName": "",
+        "lastName": "Jimmy",
+        "postalCode": "4000"
+    },
     "invalidPostal": {
         "firstName": "Test",
         "lastName": "User",

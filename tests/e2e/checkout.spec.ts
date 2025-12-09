@@ -38,3 +38,30 @@ test('standard user can complete checkout successfully', async ({ page }) => {
     const message = await checkoutPage.getCompletionMessage();
     expect(message?.trim()).toBe('Thank you for your order!');
 });
+
+
+test('checkout shows error when first name is missing', async ({ page }) => {
+    const loginPage = new LoginPage(page);
+    const inventoryPage = new InventoryPage(page);
+    const cartPage = new CartPage(page);
+    const checkoutPage = new CheckoutPage(page);
+
+    await loginPage.open();
+    await loginPage.login(users.standard.username, users.standard.password);
+
+    await inventoryPage.addProductToCartByName('Sauce Labs Backpack');
+    await inventoryPage.goToCart();
+    await cartPage.proceedToCheckout();
+
+    await checkoutPage.fillCustomerInfo(
+        userInfo.missingFirstName.firstName,
+        userInfo.missingFirstName.lastName,
+        userInfo.missingFirstName.postalCode
+    );
+
+    await checkoutPage.clickContinue();
+
+    const error = await checkoutPage.getErrorMessage();
+    expect(error).toContain('Error: First Name is required');
+});
+
