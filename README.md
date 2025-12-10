@@ -2,27 +2,17 @@
 
 A test automation framework for [Sauce Demo](https://www.saucedemo.com) using Playwright and TypeScript with the Page Object Model pattern.
 
-## 📋 Prerequisites
+## 🚀 Quick Start
 
-- Node.js (LTS version 18 or newer)
-- npm or yarn
-
-## 🚀 Installation
-
-1. Clone the repository:
 ```bash
-git clone https://github.com/yasiqb89/web-playwright-ts.git
-cd web-playwright-ts
-```
-
-2. Install dependencies:
-```bash
+# Install dependencies
 npm install
-```
 
-3. Install Playwright browsers:
-```bash
+# Install browsers
 npx playwright install
+
+# Run all tests
+npm test
 ```
 
 ## 📁 Project Structure
@@ -30,17 +20,16 @@ npx playwright install
 ```
 web-playwright-ts/
 ├── pages/              # Page Object Model classes
-│   ├── base/          # Base page class
+│   ├── base/          # BasePage with common methods
 │   ├── LoginPage.ts
 │   ├── InventoryPage.ts
 │   ├── CartPage.ts
 │   └── CheckoutPage.ts
-├── tests/             # Test specifications
-│   └── e2e/          # End-to-end tests
-├── data/              # Test data (users, user info)
-├── fixtures/          # Test fixtures
-├── utils/             # Utility functions
-└── config/            # Configuration files
+├── tests/e2e/         # End-to-end test specs
+├── fixtures/          # Custom Playwright fixtures
+├── data/              # Test data (JSON)
+├── utils/             # Helper functions
+└── .github/workflows/ # CI/CD pipeline
 ```
 
 ## 🧪 Running Tests
@@ -49,61 +38,56 @@ web-playwright-ts/
 # Run all tests
 npm test
 
-# Run E2E tests only
+# Run specific test suite
 npm run test:e2e
 
-# Run tests in UI mode
+# Run tagged tests
+npx playwright test --grep @smoke
+
+# Run with UI mode
 npm run test:ui
 
-# Run tests in headed mode (see browser)
-npm run test:headed
-
-# Run tests in debug mode
+# Debug mode
 npm run test:debug
 ```
 
+## ✨ Features
+
+### Page Object Model
+- **BasePage**: Reusable navigation and wait methods
+- **Page Classes**: Encapsulated locators and interactions
+- **Type Safety**: Full TypeScript support
+
+### Custom Fixtures
+- **loggedInPage**: Pre-configured page with login navigation
+- Reusable across multiple test specs
+- Defined in `fixtures/baseFixtures.ts`
+
+### Test Organization
+- **Tags**: `@smoke`, `@checkout`, `@formValidation`
+- **Test Data**: JSON-based user credentials
+- **Modular**: Separated by feature (login, cart, checkout)
+
+### CI/CD
+- GitHub Actions workflow
+- Automated test execution on push/PR
+- HTML report artifacts
+
 ## 📝 Test Coverage
 
-- **Login Tests**: User authentication scenarios
-- **Inventory Tests**: Product browsing, sorting, and cart operations
-- **Cart Tests**: Cart management and item removal
-- **Checkout Tests**: Complete purchase flow
+| Feature | Tests | Tags |
+|---------|-------|------|
+| Login | Authentication flows | `@smoke` |
+| Inventory | Add/remove products, cart badge | `@smoke` |
+| Cart | Item management | `@smoke` |
+| Checkout | Complete purchase flow | `@smoke`, `@checkout` |
 
-## 🏗️ Page Object Model
+## 📊 Reports
 
-Each page is represented by a class that encapsulates:
-- Locators for page elements
-- Methods for user interactions
-- Reusable page-specific logic
-
-Example:
-```typescript
-const loginPage = new LoginPage(page);
-await loginPage.open();
-await loginPage.login(username, password);
-```
-
-## ⚙️ Configuration
-
-- **Base URL**: `https://www.saucedemo.com`
-- **Browser**: Chromium (configurable in `playwright.config.ts`)
-- **Test Directory**: `./tests`
-- **Reporters**: List, HTML
-
-## 📊 Test Reports
-
-After running tests, view the HTML report:
 ```bash
+# View HTML report
 npx playwright show-report
 ```
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Open a Pull Request
 
 ## 📄 License
 

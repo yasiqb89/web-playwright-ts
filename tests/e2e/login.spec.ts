@@ -21,4 +21,3 @@ test.describe('Login Tests', () => {
         expect(error).toContain('Username and password do not match');
     })
 })
-
