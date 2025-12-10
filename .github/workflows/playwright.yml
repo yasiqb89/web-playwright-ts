@@ -25,7 +25,14 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
-      - name: Run Playwright tests
+      # On pull requests - run only @smoke tests
+      - name: Run smoke tests on PRs
+        if: github.event_name == 'pull_request'
+        run: npx playwright test --grep "@smoke"
+
+      # On push to main - run full test suite
+      - name: Run full test suite on main
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: npx playwright test
 
       - name: Upload Playwright HTML report
