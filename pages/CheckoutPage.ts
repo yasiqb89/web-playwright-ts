@@ -16,6 +16,12 @@ export class CheckoutPage extends BasePage {
     // Complete Page 
     private readonly completeHeader: Locator;
 
+    // Payment Page 
+    private readonly summaryItemPrices: Locator;
+    private readonly summarySubtotalLabel: Locator;
+    private readonly summaryTaxLabel: Locator;
+    private readonly summaryTotalLabel: Locator;
+
     constructor(page: Page) {
         super(page);
 
@@ -32,6 +38,11 @@ export class CheckoutPage extends BasePage {
 
         // For error message
         this.errorMessage = this.page.locator('[data-test="error"]');
+
+        this.summaryItemPrices = this.page.locator('.inventory_item_price');
+        this.summarySubtotalLabel = this.page.locator('.summary_subtotal_label');
+        this.summaryTaxLabel = this.page.locator('.summary_tax_label');
+        this.summaryTotalLabel = this.page.locator('.summary_total_label');
     }
 
     async fillCustomerInfo(firstName: string, lastName: string, postalCode: string) {
@@ -47,6 +58,10 @@ export class CheckoutPage extends BasePage {
 
     async clickContinue() {
         await this.continueButton.click();
+    }
+
+    async cancelCheckout() {
+        await this.cancelButton.click();
     }
 
     async finishCheckout() {
@@ -66,4 +81,31 @@ export class CheckoutPage extends BasePage {
             return null;
         }
     }
+
+    private parseMoney(text: string | null): number {
+        if (!text) return 0;
+        return Number(text.replace(/[^0-9.]/g, ''));
+    }
+
+    async getOverviewItemPrices(): Promise<number[]> {
+        const texts = await this.summaryItemPrices.allTextContents();
+        return texts.map(t => this.parseMoney(t));
+    }
+
+    async getSummarySubtotal(): Promise<number> {
+        const text = await this.summarySubtotalLabel.textContent();
+        return this.parseMoney(text);
+
+    }
+
+    async getSummaryTax(): Promise<number> {
+        const text = await this.summaryTaxLabel.textContent();
+        return this.parseMoney(text);
+    }
+
+    async getSummaryTotal(): Promise<number> {
+        const text = await this.summaryTotalLabel.textContent();
+        return this.parseMoney(text);
+    }
+
 }
