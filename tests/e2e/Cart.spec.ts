@@ -49,6 +49,7 @@ test.describe('Cart Tests', () => {
         const cartNames = await cartPage.getItemNames();
         expect(cartNames).toEqual(['Sauce Labs Bike Light']);
 
+
     });
 
 });
