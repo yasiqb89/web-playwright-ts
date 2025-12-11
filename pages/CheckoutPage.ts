@@ -1,5 +1,6 @@
 import { BasePage } from "./base/BasePage";
 import { Page, Locator } from "@playwright/test";
+import { parseMoney } from "../utils/helpers";
 
 export class CheckoutPage extends BasePage {
     private readonly firstNameInput: Locator;
@@ -82,30 +83,25 @@ export class CheckoutPage extends BasePage {
         }
     }
 
-    private parseMoney(text: string | null): number {
-        if (!text) return 0;
-        return Number(text.replace(/[^0-9.]/g, ''));
-    }
-
     async getOverviewItemPrices(): Promise<number[]> {
         const texts = await this.summaryItemPrices.allTextContents();
-        return texts.map(t => this.parseMoney(t));
+        return texts.map(t => parseMoney(t));
     }
 
     async getSummarySubtotal(): Promise<number> {
         const text = await this.summarySubtotalLabel.textContent();
-        return this.parseMoney(text);
+        return parseMoney(text);
 
     }
 
     async getSummaryTax(): Promise<number> {
         const text = await this.summaryTaxLabel.textContent();
-        return this.parseMoney(text);
+        return parseMoney(text);
     }
 
     async getSummaryTotal(): Promise<number> {
         const text = await this.summaryTotalLabel.textContent();
-        return this.parseMoney(text);
+        return parseMoney(text);
     }
 
 }
