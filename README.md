@@ -1,6 +1,6 @@
 # Web Playwright TypeScript
 
-A test automation framework for [Sauce Demo](https://www.saucedemo.com) using Playwright and TypeScript with the Page Object Model pattern.
+A test automation framework for web applications using Playwright and TypeScript with the Page Object Model pattern. Tests are demonstrated on the [SauceDemo](https://www.saucedemo.com) website.
 
 ## 🚀 Quick Start
 

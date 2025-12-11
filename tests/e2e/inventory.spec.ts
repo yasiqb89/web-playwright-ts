@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from '../../fixtures/baseFixtures';
 import { LoginPage } from '../../pages/LoginPage';
 import { InventoryPage } from '../../pages/InventoryPage';
 import users from '../../data/users.json';
@@ -6,13 +6,12 @@ import users from '../../data/users.json';
 
 test.describe('Inventory Tests', () => {
 
-    test('adding product to cart updates cart badge count', { tag: ['@smoke', '@formValidation'] }, async ({ page }) => {
-        const loginPage = new LoginPage(page);
-        const inventoryPage = new InventoryPage(page);
+    test('adding product to cart updates cart badge count', { tag: ['@smoke', '@formValidation'] }, async ({ loggedInPage }) => {
+        const loginPage = new LoginPage(loggedInPage);
+        const inventoryPage = new InventoryPage(loggedInPage);
 
-        await loginPage.open();
         await loginPage.login(users.standard.username, users.standard.password);
-        await expect(page).toHaveURL('/inventory.html');
+        await expect(loggedInPage).toHaveURL('/inventory.html');
 
         await inventoryPage.addProductToCartByName('Sauce Labs Backpack');
 
@@ -21,11 +20,10 @@ test.describe('Inventory Tests', () => {
     });
 
 
-    test('user can add multiple products to the cart', { tag: '@smoke' }, async ({ page }) => {
-        const loginPage = new LoginPage(page);
-        const inventoryPage = new InventoryPage(page);
+    test('user can add multiple products to the cart', { tag: '@smoke' }, async ({ loggedInPage }) => {
+        const loginPage = new LoginPage(loggedInPage);
+        const inventoryPage = new InventoryPage(loggedInPage);
 
-        await loginPage.open();
         await loginPage.login(users.standard.username, users.standard.password);
 
         await inventoryPage.addProductToCartByName('Sauce Labs Backpack');
@@ -36,11 +34,10 @@ test.describe('Inventory Tests', () => {
     });
 
 
-    test('remove product from cart', { tag: '@smoke' }, async ({ page }) => {
-        const loginPage = new LoginPage(page);
-        const inventoryPage = new InventoryPage(page);
+    test('remove product from cart', { tag: '@smoke' }, async ({ loggedInPage }) => {
+        const loginPage = new LoginPage(loggedInPage);
+        const inventoryPage = new InventoryPage(loggedInPage);
 
-        await loginPage.open();
         await loginPage.login(users.standard.username, users.standard.password);
 
         await inventoryPage.addProductToCartByName('Sauce Labs Backpack');
@@ -52,11 +49,10 @@ test.describe('Inventory Tests', () => {
     });
 
 
-    test('sort products by name A-Z', async ({ page }) => {
-        const loginPage = new LoginPage(page);
-        const inventoryPage = new InventoryPage(page);
+    test('sort products by name A-Z', async ({ loggedInPage }) => {
+        const loginPage = new LoginPage(loggedInPage);
+        const inventoryPage = new InventoryPage(loggedInPage);
 
-        await loginPage.open();
         await loginPage.login(users.standard.username, users.standard.password);
         await inventoryPage.sortByNameAscending();
 
@@ -66,11 +62,10 @@ test.describe('Inventory Tests', () => {
     });
 
 
-    test('sort products by name Z-A', async ({ page }) => {
-        const loginPage = new LoginPage(page);
-        const inventoryPage = new InventoryPage(page);
+    test('sort products by name Z-A', async ({ loggedInPage }) => {
+        const loginPage = new LoginPage(loggedInPage);
+        const inventoryPage = new InventoryPage(loggedInPage);
 
-        await loginPage.open();
         await loginPage.login(users.standard.username, users.standard.password);
         await inventoryPage.sortByNameDescending();
 
@@ -80,11 +75,10 @@ test.describe('Inventory Tests', () => {
     });
 
 
-    test('sort products by price low to high', async ({ page }) => {
-        const loginPage = new LoginPage(page);
-        const inventoryPage = new InventoryPage(page);
+    test('sort products by price low to high', async ({ loggedInPage }) => {
+        const loginPage = new LoginPage(loggedInPage);
+        const inventoryPage = new InventoryPage(loggedInPage);
 
-        await loginPage.open();
         await loginPage.login(users.standard.username, users.standard.password);
         await inventoryPage.sortByPriceLowToHigh();
 
@@ -94,11 +88,10 @@ test.describe('Inventory Tests', () => {
     });
 
 
-    test('sort products by price high to low', async ({ page }) => {
-        const loginPage = new LoginPage(page);
-        const inventoryPage = new InventoryPage(page);
+    test('sort products by price high to low', async ({ loggedInPage }) => {
+        const loginPage = new LoginPage(loggedInPage);
+        const inventoryPage = new InventoryPage(loggedInPage);
 
-        await loginPage.open();
         await loginPage.login(users.standard.username, users.standard.password);
 
         await inventoryPage.sortByPriceHighToLow();
