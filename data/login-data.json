@@ -10,6 +10,6 @@
         "username": "wrong_user",
         "password": "wrong_password",
         "expectSuccess": false,
-        "expectedError": "'Username and password do not match'"
+        "expectedError": "Epic sadface: Username and password do not match any user in this service"
     }
 ]

@@ -28,7 +28,7 @@ test.describe('Login Tests', () => {
 test.describe('Login Tests DDT', () => {
 
     for (const data of loginData) {
-        test(data.name, { tag: ['@smoke'] }, async ({ loggedInPage }) => {
+        test(data.name, { tag: ['@smoke', '@auth'] }, async ({ loggedInPage }) => {
             const loginPage = new LoginPage(loggedInPage);
 
             await loginPage.login(data.username, data.password);
