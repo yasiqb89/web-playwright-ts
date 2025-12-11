@@ -1,0 +1,15 @@
+[
+    {
+        "name": "valid user should login successfully",
+        "username": "standard_user",
+        "password": "secret_sauce",
+        "expectSuccess": true
+    },
+    {
+        "name": "invalid user should see error",
+        "username": "wrong_user",
+        "password": "wrong_password",
+        "expectSuccess": false,
+        "expectedError": "'Username and password do not match'"
+    }
+]
