@@ -31,4 +31,3 @@ export class LoginPage extends BasePage {
         return this.errorMessage.textContent();
     }
 }
-

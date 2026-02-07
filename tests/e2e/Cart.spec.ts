@@ -1,16 +1,10 @@
-import { test, expect } from '@playwright/test';
-import { LoginPage } from '../../pages/LoginPage';
-import { InventoryPage } from '../../pages/InventoryPage';
-import { CartPage } from '../../pages/CartPage';
+import { test, expect } from '../../fixtures/baseFixtures';
 import users from '../../data/users.json';
+
 
 test.describe('Cart Tests', () => {
 
-    test('items added to cart should appear correctly in cart page', { tag: '@smoke' }, async ({ page }) => {
-        const loginPage = new LoginPage(page);
-        const inventoryPage = new InventoryPage(page);
-        const cartPage = new CartPage(page);
-
+    test('items added to cart should appear correctly in cart page', { tag: '@smoke' }, async ({ loginPage, inventoryPage, cartPage }) => {
         await loginPage.open();
         await loginPage.login(users.standard.username, users.standard.password);
 
@@ -28,11 +22,7 @@ test.describe('Cart Tests', () => {
     });
 
 
-    test('user can remove an item from the cart', async ({ page }) => {
-        const loginPage = new LoginPage(page);
-        const inventoryPage = new InventoryPage(page);
-        const cartPage = new CartPage(page);
-
+    test('user can remove an item from the cart', async ({ loginPage, inventoryPage, cartPage }) => {
         await loginPage.open();
         await loginPage.login(users.standard.username, users.standard.password);
 
@@ -53,5 +43,3 @@ test.describe('Cart Tests', () => {
     });
 
 });
-
-

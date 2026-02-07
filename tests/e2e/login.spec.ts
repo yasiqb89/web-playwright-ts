@@ -1,21 +1,16 @@
 import { test, expect } from "../../fixtures/baseFixtures";
-import { LoginPage } from "../../pages/LoginPage";
 import users from "../../data/users.json";
 import loginData from "../../data/login-data.json";
 
 
 test.describe('Login Tests', () => {
 
-    test('successfull login', { tag: ['@smoke'] }, async ({ loggedInPage }) => {
-        const loginPage = new LoginPage(loggedInPage);
-
+    test('successfull login', { tag: ['@smoke'] }, async ({ loggedInPage, loginPage }) => {
         await loginPage.login(users.standard.username, users.standard.password);
         await expect(loggedInPage).toHaveURL('/inventory.html');
     })
 
-    test('unsuccessfull login', { tag: ['@smoke'] }, async ({ loggedInPage }) => {
-        const loginPage = new LoginPage(loggedInPage);
-
+    test('unsuccessfull login', { tag: ['@smoke'] }, async ({ loginPage }) => {
         await loginPage.login(users.invalidUser.username, users.invalidUser.password);
 
         const error = await loginPage.getErrorMessage();
@@ -28,9 +23,7 @@ test.describe('Login Tests', () => {
 test.describe('Login Tests DDT', () => {
 
     for (const data of loginData) {
-        test(data.name, { tag: ['@smoke', '@auth'] }, async ({ loggedInPage }) => {
-            const loginPage = new LoginPage(loggedInPage);
-
+        test(data.name, { tag: ['@smoke', '@auth'] }, async ({ loggedInPage, loginPage }) => {
             await loginPage.login(data.username, data.password);
 
             if (data.expectSuccess) {

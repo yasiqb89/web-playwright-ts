@@ -1,20 +1,11 @@
-import { test, expect } from '@playwright/test';
-import { LoginPage } from '../../pages/LoginPage';
-import { InventoryPage } from '../../pages/InventoryPage';
-import { CartPage } from '../../pages/CartPage';
-import { CheckoutPage } from '../../pages/CheckoutPage';
+import { test, expect } from '../../fixtures/baseFixtures';
 import users from '../../data/users.json';
 import userInfo from '../../data/user-info.json';
 import { url } from 'inspector';
 
 test.describe('Checkout Tests', () => {
 
-    test('user can complete checkout successfully', { tag: ['@smoke', '@checkout'] }, async ({ page }) => {
-        const loginPage = new LoginPage(page);
-        const inventoryPage = new InventoryPage(page);
-        const cartPage = new CartPage(page);
-        const checkoutPage = new CheckoutPage(page);
-
+    test('user can complete checkout successfully', { tag: ['@smoke', '@checkout'] }, async ({ loginPage, inventoryPage, cartPage, checkoutPage }) => {
         await loginPage.open();
         await loginPage.login(users.standard.username, users.standard.password);
 
@@ -43,12 +34,7 @@ test.describe('Checkout Tests', () => {
     });
 
 
-    test('checkout error when first name is missing', async ({ page }) => {
-        const loginPage = new LoginPage(page);
-        const inventoryPage = new InventoryPage(page);
-        const cartPage = new CartPage(page);
-        const checkoutPage = new CheckoutPage(page);
-
+    test('checkout error when first name is missing', async ({ loginPage, inventoryPage, cartPage, checkoutPage }) => {
         await loginPage.open();
         await loginPage.login(users.standard.username, users.standard.password);
 
@@ -69,12 +55,7 @@ test.describe('Checkout Tests', () => {
     });
 
 
-    test('checkout error when last name is missing', async ({ page }) => {
-        const loginPage = new LoginPage(page);
-        const inventoryPage = new InventoryPage(page);
-        const cartPage = new CartPage(page);
-        const checkoutPage = new CheckoutPage(page);
-
+    test('checkout error when last name is missing', async ({ loginPage, inventoryPage, cartPage, checkoutPage }) => {
         await loginPage.open();
         await loginPage.login(users.standard.username, users.standard.password);
         await inventoryPage.addProductToCartByName('Sauce Labs Backpack');
@@ -94,12 +75,7 @@ test.describe('Checkout Tests', () => {
     })
 
 
-    test('checkout error when postal code is missing', async ({ page }) => {
-        const loginPage = new LoginPage(page);
-        const inventoryPage = new InventoryPage(page);
-        const cartPage = new CartPage(page);
-        const checkoutPage = new CheckoutPage(page);
-
+    test('checkout error when postal code is missing', async ({ loginPage, inventoryPage, cartPage, checkoutPage }) => {
         await loginPage.open();
         await loginPage.login(users.standard.username, users.standard.password);
         await inventoryPage.addProductToCartByName('Sauce Labs Backpack');
@@ -119,12 +95,7 @@ test.describe('Checkout Tests', () => {
     })
 
 
-    test('Cancel on checkout step one returns to Cart', async ({ page }) => {
-
-        const loginPage = new LoginPage(page);
-        const inventoryPage = new InventoryPage(page);
-        const cartPage = new CartPage(page);
-        const checkoutPage = new CheckoutPage(page);
+    test('Cancel on checkout step one returns to Cart', async ({ loginPage, inventoryPage, cartPage, checkoutPage }) => {
 
         await loginPage.open();
         await loginPage.login(users.standard.username, users.standard.password);
@@ -137,12 +108,7 @@ test.describe('Checkout Tests', () => {
     })
 
 
-    test('cancel on checkout step two returns to inventory', { tag: ['@checkout', '@regression'] }, async ({ page }) => {
-        const loginPage = new LoginPage(page);
-        const inventoryPage = new InventoryPage(page);
-        const cartPage = new CartPage(page);
-        const checkoutPage = new CheckoutPage(page);
-
+    test('cancel on checkout step two returns to inventory', { tag: ['@checkout', '@regression'] }, async ({ loginPage, inventoryPage, cartPage, checkoutPage }) => {
         await loginPage.open();
         await loginPage.login(users.standard.username, users.standard.password);
 
@@ -162,12 +128,7 @@ test.describe('Checkout Tests', () => {
         expect(page.url()).toContain('inventory.html');
     });
 
-    test('order summary total matches sum of item prices plus tax', { tag: ['@checkout', '@regression'] }, async ({ page }) => {
-        const loginPage = new LoginPage(page);
-        const inventoryPage = new InventoryPage(page);
-        const cartPage = new CartPage(page);
-        const checkoutPage = new CheckoutPage(page);
-
+    test('order summary total matches sum of item prices plus tax', { tag: ['@checkout', '@regression'] }, async ({ loginPage, inventoryPage, cartPage, checkoutPage }) => {
         await loginPage.open();
         await loginPage.login(users.standard.username, users.standard.password);
 
